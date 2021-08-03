@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://media-exp1.licdn.com/dms/image/C4D0BAQHsDV8LdqxPPg/company-logo_200_200/0/1618474044810?e=1635379200&v=beta&t=aSufSdGuf2iKzSTJ7wbPKEd8nSbL2Ij57eUISnegI7c" rel="shortcut icon">
+    <title>Page_update_files</title>
+      <style type="text/css">
+       .frame {
+        background: #013220;
+        color: #fff;
+        padding: 6px;
+        border-radius: 8px;
+       }
+  </style>
+</head>
+<body style="background-color:black">
+
+<header>
+		<div class="d-flex flex-md-row align-items-center bg-black border-bottom box-shadow">
+		 <h4 class="my-1 mr-md-auto">Unic lab File manager</h4>
+		  <nav class="">
+			<a class="p-1 text-dark btn-lg " href="http://unic-lab.ru/">Contact us</a>
+			<a class="p-1 text-dark btn-lg" href="https://www.linkedin.com/company/unic-lab">About</a>
+            <a class="p-1 text-dark btn-lg" href="{{ url_for('home') }}">Home page</a>
+		  </nav>
+            <div class="float-sm-right l-auto p-1" >
+                <div class="col text-right" >
+                    {% if current_user.is_anonymous %}
+                    <a class="p-2 btn btn-outline-primary btn-sm float-right"  href="{{ url_for('login') }}">Log in</a>
+                        <a class="p-2 btn btn-outline-info btn-sm" href="{{ url_for('registration') }}">Registration</a>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                        <h4 class="my-1 mr-md-auto">Welcome, {{ current_user.login }}!</h4>
+                        <a class="btn btn-outline-primary btn-sm float-right"  href="{{ url_for('logout') }}">Log out</a>
+                        <a class="btn btn-outline-secondary btn-sm float-right"  href="{{ url_for('registration') }}">Register new</a>
+                    {% endif %}
+                </div>
+            </div>
+		</div>
+	</header>
+        {% if current_user.is_anonymous %}
+            <div class="container"><br>
+                {% for key in content.keys() %}
+                    <br><div class="frame">
+                        <div class="col text-center">
+                            <h3>File name: </h3>
+                            {{ key[0] }}<br>
+                            <h3>Content: </h3>
+                            {{ content[key][0] }}<br>
+                        </div>
+                    </div><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+            <div class="container"><br>
+            <div class="col text-center">
+                <a class="p-2 btn btn-outline-warning btn-lg"
+                   href="{{ url_for('create_file') }}">Create file right now</a>
+            </div>
+                {% for key in content.keys() %}
+                    <br><div class="frame">
+                        <div class="col text-center">
+                            <h3>File name: </h3>
+                            {{ key[0] }}<br>
+                            <h3>Content: </h3>
+                            {{ content[key][0] }}<br>
+                            <a class="p-2 btn btn-outline-primary btn-sm "
+                               href="{{ url_for('update_content', filename=key[0])}}">Update</a>
+                            <a class="p-2 btn btn-outline-danger btn-sm float-right"
+                               href="{{ url_for('delete_file', file=key[0]) }}">Delete</a>
+                        </div>
+                    </div><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+</body>
+</html>

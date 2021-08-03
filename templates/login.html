@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://media-exp1.licdn.com/dms/image/C4D0BAQHsDV8LdqxPPg/company-logo_200_200/0/1618474044810?e=1635379200&v=beta&t=aSufSdGuf2iKzSTJ7wbPKEd8nSbL2Ij57eUISnegI7c" rel="shortcut icon">
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+</head>
+<body style="background-color:black">
+<header id="header">
+
+		<div class="d-flex p-2 flex-column flex-md-row align-items-center p-3 px-md-5 mb-3 bg-black border-bottom box-shadow">
+		 <h3 class="my-1 mr-md-auto">Unic lab File manager</h3>
+		  <nav class="my-2 my-md-0 mr-md-3">
+			<a class="p-1 text-dark btn-lg" href="http://unic-lab.ru/">Contact us</a>
+			<a class="p-1 text-dark btn-lg" href="https://www.linkedin.com/company/unic-lab">About</a>
+            <a class="p-1 text-dark btn-lg" href="{{ url_for('home') }}">Home page</a>
+		  </nav>
+		</div>
+	</header>
+
+
+    <form method="post">
+        <div class="container">
+            <h1>Log in</h1>
+            {% for category, message in  get_flashed_messages(with_categories=true) %}
+            <spam class="{{ category }}">{{ message }}</spam>
+            {% endfor %}
+            <input type="text" name="login" id='login' class="form-control"><br>
+            <input type="password" name="password" id='password' class="form-control"><br>
+            <input type="submit" class="btn btn-success" value="Send">
+            <a class="btn btn-secondary" href="{{ url_for('registration') }}">Registration</a>
+        </div>
+    </form>
+</body>
+</html>

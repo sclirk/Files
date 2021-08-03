@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://media-exp1.licdn.com/dms/image/C4D0BAQHsDV8LdqxPPg/company-logo_200_200/0/1618474044810?e=1635379200&v=beta&t=aSufSdGuf2iKzSTJ7wbPKEd8nSbL2Ij57eUISnegI7c" rel="shortcut icon">
+    <title>Create new file</title>
+</head>
+<body style="background-color:black">
+
+<header id="header">
+
+		<div class="d-flex p-2 flex-column flex-md-row align-items-center p-3 px-md-5 mb-3 bg-black border-bottom box-shadow">
+		 <h3 class="my-1 mr-md-auto">Unic lab File manager</h3>
+		  <nav class="my-2 my-md-0 mr-md-3">
+			<a class="p-1 text-dark btn-lg" href="http://unic-lab.ru/">Contact us</a>
+			<a class="p-1 text-dark btn-lg" href="https://www.linkedin.com/company/unic-lab">About</a>
+            <a class="p-1 text-dark btn-lg" href="{{ url_for('home') }}">Home page</a>
+		  </nav>
+		</div>
+	</header>
+
+    <form method = "POST">
+        <div class="container">
+            <div class="col text-center">
+               <h3>Create new file</h3>
+               <input type="text" id='filename' name = "filename" class="form-control" value="Enter filename "><br>
+               <input type="text" id='content' name = "content" class="form-control" value="Enter content "><br>
+                 <select class="form-control" style="width: 100%;display:inline-block" name="folder">
+                    {% for data in folders %}
+                    <option value="{{ data }}">{{ data }}</option>
+                    {% endfor %}
+                 </select>
+
+               <input type="submit" class="btn btn-success" value="Send">
+               <a class="btn btn-warning" href="{{ url_for('home') }}">Cancel</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
